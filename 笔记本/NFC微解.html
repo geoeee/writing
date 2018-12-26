@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFC微解</title>
+    <style type="text/css" media="all">
+      body {
+        margin: 0;
+        font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+        color: #777;
+        background-color: white;
+      }
+      .container {
+        width: 700px;
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      .post {
+        font-family: Georgia, "Times New Roman", Times, "SimSun", serif;
+        position: relative;
+        padding: 70px;
+        bottom: 0;
+        overflow-y: auto;
+        font-size: 16px;
+        font-weight: normal;
+        line-height: 25px;
+        color: #515151;
+      }
+
+      .post h1{
+        font-size: 50px;
+        font-weight: 500;
+        line-height: 60px;
+        margin-bottom: 40px;
+        color: inherit;
+      }
+
+      .post p {
+        margin: 0 0 35px 0;
+      }
+
+      .post img {
+        border: 1px solid #D9D9D9;
+      }
+
+      .post a {
+        color: #28A1C5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="post">
+        <h1 class="title">NFC微解</h1>
+        <div class="show-content">
+          <p>NFC技术是耳熟能详的技术，智能手机人手一部之后，也有厂家把NFC芯片植入到智能手机里面达到一些本来做不到的功能。十分典型的应用有票务和支付，票务就是地铁上经常看到的刷手机，当智能卡用，支付也差不多，会在硬件上多另外一些原件，实现电子钱包。<br></p><p>先从原理和基础说一说，NFC这个技术不是平地而起，白手起家的技术，是以RFID技术为基础的，先来介绍一下RFID（Radio Frequency Identification）射频身份识别，是一项应用十分广泛的技术，大量应用在门禁，识别系统中，在大厦办公室里工作的人们每天都接触得到，就是员工卡打卡上班。自然它是有国际标准的，ISO14443标准就是官方文档。技术上讲，无线通讯就需要一个工作频率，RFID的工作频率有很多，典型的就有125KHz，133KHz，13.56MHz，27.12MHz，433MHz，2.45GHz等等。</p><p>NFC技术是直接机遇RFID技术，在工作频率上选择了一个13.56MHz，仔细观察就会注意到，门禁打卡或者公交智能卡的工作距离从紧贴到十五厘米的样子都能工作，NFC的工作距离官方标准时零到10CM，但是配合MFC的信号衰减技术，一般要紧贴设备才会正常工作。</p><p>NFC芯片就是一个线圈天线加上一个处理单元，成为了芯片主体，另外就是看有没有自己的电源，如果有就可以成为读卡器，生成电磁场。没有电源就类似于非接触式智能卡，储存信息供读取。</p><p>我开始随便想，为什么会贴的那么近来作为工作距离呢，我想有以下两点，在智能手机上来说有几个问题是比较重要的，一个是能耗，一个模块的工作能耗是很影响手机的体验的，工作距离接近就意味着芯片的发射功率本身就可以很低，近距离的情况下才会正常工作，进一步减小了功耗，节省能量。第二，紧贴的工作距离就会增强信息传输的安全性，对比其他无限通讯技术，WiFi的通讯安全性最低，蓝牙，Zigbee其次，NFC的安全性最高，被用来做支付就能理解了。</p><p>NFC这个技术的标准时各个大厂商组成的论坛来运营的，叫做NFC-Forum，董事会成员可以说都是大有来头，惠普，万事达卡国际，微软，NEC，NXP，松下，三星，Sony，Visa，都是这些大厂商，很能看出苗头，有知名的技术厂商，也有掌握渠道的支付业翘楚，Nokia之前也是移动业界的龙头，现在苹果马上要发布的iPhone6不知道会不会增加NFC的支持。</p><p>就标准来说，NFC的标准一开始是提交给欧洲的，ECMA-340，后来同样是ISO18092也是NFCIP-1，貌似现在升级到NFCIP-2了已经，但都是差不多的文档，在较为底层的硬件射频层和RFID的ISO14443是相同的，只是各家NFC的厂商更改了最上面的命令接口层，制造了互相兼容的NFC设备。</p><p>很早就听说NFC出了一个移动支付，想来就像吧校园一卡通搬到了大街小巷，倒是解决了现金交易的很多麻烦。但是要使用NFC支付，首先需要卖家支持NFC设备支付，也就是一个读取设备。第二需要消费者的手机支持NFC功能，而且需要运营商定制的支持NFC功能的SIM卡，听上去就是很麻烦的样子。这几天支付宝的当面付和付款码热火朝天，一分钱饮料甚么的真的是诱惑十足，在支付这一块，NFC貌似没什么特别的。</p><p>很有意思的是另一块，连接服务，最近新出的小米路由器带上了NFC功能，也就是在路由器支持了NFC功能，这个芯片里有路由器的SSID名和WiFi密码，只要支持NFC的手机触碰路由器，被加密的信息就会传输到手机，瞬间连接上WiFi，听上去非常炫酷的一件事情。当然蓝牙连接也是相似的，触碰一下连接蓝牙，很多新出的智能设备是没有什么交互界面的，比如蓝牙音箱，手环手表，蓝牙配对有NFC的话，也是不需要搜索设备，再连接，想起来也是比较酷。</p><p>（附：言辞不谨，如有错疏，万望明示指摘）</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

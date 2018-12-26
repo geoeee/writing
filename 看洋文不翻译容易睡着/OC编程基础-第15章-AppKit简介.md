@@ -1,0 +1,23 @@
+###第15章 AppKit简介
+到目前为止，本书中所有的程序都是用了Foundation Kit，并通过将文本输出结果发送到控制台的原始方式向我们传达信息。用Foundation Kit确实不错，但真正有趣的还是可以构建一个向Mac那样的用户界面，既可以点击又可以玩的。本章将会介绍Application Kit（简称AppKit）的一些重要特性，你会在AppKit里面看到Cocoa中关于用户界面的大量资源。
+本章将要创建的应用程序的名称是CaseTool，它显示了一个窗口，该窗口的外观类似于一个窗口，包含了一个文本框，一个标签和两个按钮。向文本框中输入文本并点击一个按钮之后，输入的文本就会转换为大写或者小写的形式。这项功能确实很酷，但你肯定想在应用程序在Mac App Store商家并收费钱为其添加更多功能。
+#####15.1 构建项目
+使用Xcode来构建这项目，我们将逐步引导你完成整个过程。你要做的第一件事奇怪是创建项目文件，然后对用户界面进行布局，最后将建立UI与代码之间的关联。
+创建Cocoa应用程序项目之前要先打开Xcode，在西东界面中点击Create a New Xcode Project选项。选择左边的Mac OS X标题下面的Application选项，然后再选择Cocoa Application图标，之后点击Next设置接下来的选项。
+第一项是Product Name(应用名称)，我们在这里输入CaseTool。下一个文本框是Company Identifier（企业标示符），AppStore依靠他来区分你的应用程序。Company Indentifier通常都是反域名（reverse-domain-name）格式，也就是说以com开头，然后是句号和企业名称。在这个示例中，我们用的是com.MySuperCompany。这个文本框中的内容是区分大消息的，在创建自动应用程序的时候需要注意着一点。
+接下来的文本框是类前缀（Class Prefix）。通常应该在这里输入3个以上的字母，这个字符创会出现在你创建的新类的名称开头。我们在这里输入MSC（即My Super Company的缩写）。如果你创建了一个名称为Circle的类，Xcode会自动将其命名为MSCCircle。尾门射这么做，因为OC中没哟命名空间（namespace），它用的是一种伪命名空间的方法，将应用程序中的一些名称存储起来了。这样，如果你是用了第三方框架，并且里面也有一个名为Circle的类，那么他将不会与你的名称发生冲突。
+在App  Store Category下拉列表中选择Utilities，因为我们要创建的应用程序其实就是一个实用工具。
+至于其他选项，请确保没有选中Create Document_Based Application,Use Core Data和Include Units Tests复选框。只有Use Automatic Reference Counting复选框需要被选中。
+最后会弹出一个让你选择保存项目的目录位置的对话框。本书不会讨论源代码管理，当然如果你愿意的换，可以选择对话框下面的Source Control选项，创建一个Git版本控制。Xcode被指了Subversion（SVN）和Git的源代码管理功能。
+完成这些之后你的新项目就已经创建好了。如果你展开Xcode窗口左边的CaseTool群组，将会看到项目中已经存在了一些文件：MSCAppDelegate.h，MSCAppDelegate.m和mainMenu.xib。
+其中MSCAppDelegate类负责控制应用程序的运行。
+#####15.2 创建委托文件的@interface部分
+我们将使用Xcode中的Interface Builder编辑器来布局窗口内容，并在MSCAppDelegate与用户界面之间创建各种连接。Interface Builder也适用于布局iOS应用程序，因此乌璐你要为哪一个平台开发应用程序，都需要在Interface Builder上进行许多工作。我们将向MSCAppDelegate类添加一些代码，这样Interface Builder就能够识别我们添加的内容，以便于我们构建用户界面。
+首先来浏览一下委托的头文件：
+#import <Cocoa/Cocoa.h>
+@interface MSCAppDelegate : NSObject <NSApplicationDelegate>
+@property (assign) IBOutlet NSWindow *window;
+@end
+你将会看到一个叫做IBOutlet的关键字。它不是一个真正的OC关键字，但我们通常会在Interface Builder中使用它。你可能注意到了再IBOutlet那行代码的左边边栏有一个小店。点击那个小店就会直接跳转到Interface Builder中与其相关的对象之上。
+我么之后还会遇到另一个项关键字的IBAction。IBAction被定义为void的作用，这意味着这个在文件中声明的方法返回的类型讲师void（也就是什么都不返回）。
+如果IBOutlet和IBAction不执行任何操作，为什么还要定义他们呢？原因是他们不适用于编译的，而是为了Interface Builder以及阅读代码的人提供的标记。通过查找文件中的IBOutlet和IBAction语句，Interface Builder就能知道MSCDelegate对象拥有两个可以用来连接的实例变量，并且MSCDelegate还提供了两个方法作为按钮点击（也可能是其他介面操作）的目标。稍后将讲解其运行原理。
